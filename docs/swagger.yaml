@@ -1,0 +1,112 @@
+basePath: /
+definitions:
+  utils.Response:
+    properties:
+      code:
+        type: integer
+      data: {}
+      msg:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: congdeptrai@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample api.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: Go + Gin Book đào API
+  version: "1.0"
+paths:
+  /auth:
+    get:
+      operationId: get-auth
+      parameters:
+      - description: Username
+        in: body
+        name: user_name
+        required: true
+        schema:
+          type: string
+      - description: Password
+        in: body
+        name: password
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.Response'
+      summary: get auth
+  /create-book:
+    post:
+      operationId: create-book
+      parameters:
+      - description: Title
+        in: body
+        name: title
+        required: true
+        schema:
+          type: string
+      - description: AuthorName
+        in: body
+        name: author_name
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.Response'
+      summary: add a new item to the book list
+  /get-all-books:
+    get:
+      operationId: get-all-books
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.Response'
+      summary: get all items in the book list
+  /get-book-by-id/{id}:
+    get:
+      operationId: get-book-by-id
+      parameters:
+      - description: book_id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/utils.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.Response'
+      summary: get a book item by ID
+swagger: "2.0"
